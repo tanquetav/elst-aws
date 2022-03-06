@@ -32,7 +32,7 @@ resource "aws_instance" "worker" {
 
   metadata_options {
     http_endpoint = "enabled"
-    http_tokens = "required"
+    http_tokens   = "required"
   }
 
   tags = {

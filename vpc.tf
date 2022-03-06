@@ -36,10 +36,8 @@ resource "aws_route_table" "routing_table" {
 }
 
 resource "aws_route_table_association" "association" {
-  count = 1
-
   route_table_id = aws_route_table.table.id
-  subnet_id      = element(aws_subnet.subnet.*.id, count.index)
+  subnet_id      = element(aws_subnet.subnet.*.id, 0)
 }
 
 resource "aws_security_group" "forwarder" {

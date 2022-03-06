@@ -4,7 +4,7 @@ cloud-init status --wait
 echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
 systemctl enable elasticsearch
 systemctl start elasticsearch
-#cp -r /etc/elasticsearch/certs /etc/kibana/certs
+
 mkdir -p /etc/kibana/certs
 cp /tmp/kibana-server.* /etc/kibana/certs
 chown -R kibana.kibana /etc/kibana/certs
@@ -26,6 +26,5 @@ systemctl enable kibana --now
 
 NODE_TOKEN=`/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node`
 PASS=`cat /var/log/cloud-init-output.log |grep "elastic built-in superuser is"| awk -F ': ' '{print $2}'`
-echo "Pass : $PASS"
 echo -n $NODE_TOKEN > /home/ubuntu/node_token
 echo -n ${PASS::-1} > /home/ubuntu/elastic_password

@@ -9,7 +9,6 @@ locals {
     "make",
     "prometheus-node-exporter",
     "python3-pip",
-    "default-jdk",
     "software-properties-common",
     "tmux",
     "tree",
