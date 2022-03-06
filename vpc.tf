@@ -43,37 +43,45 @@ resource "aws_route_table_association" "association" {
 }
 
 resource "aws_security_group" "forwarder" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
+  description = "Allow inbound SSH and Kibana traffic"
 
   ingress {
+    description = "Allow inbound SSH"
     protocol    = "tcp"
     from_port   = 22
     to_port     = 22
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:aws-vpc-no-public-ingress-sg
   }
 
   ingress {
+    description = "Allow elastic peer internal traffic"
     protocol    = "tcp"
     from_port   = 9300
     to_port     = 9300
     cidr_blocks = [aws_subnet.subnet.cidr_block]
   }
+
   ingress {
+    description = "Allow elastic internal traffic"
     protocol    = "tcp"
     from_port   = 9200
     to_port     = 9200
     cidr_blocks = [aws_subnet.subnet.cidr_block]
   }
+
   ingress {
+    description = "Allow inbound Kibana Access"
     protocol    = "tcp"
     from_port   = 5601
     to_port     = 5601
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:aws-vpc-no-public-ingress-sg
   }
   egress {
+    description = "Allow outbound traffic"
     protocol    = "tcp"
     from_port   = 0
     to_port     = 65535
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"] #tfsec:ignore:aws-vpc-no-public-egress-sg
   }
 }

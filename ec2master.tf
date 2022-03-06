@@ -23,7 +23,13 @@ resource "aws_instance" "master" {
   instance_type               = "t3a.medium"
   key_name                    = var.name
   user_data                   = data.cloudinit_config.cloudinit.rendered
-  associate_public_ip_address = true
+  associate_public_ip_address = true #tfsec:ignore:aws-autoscaling-no-public-ip
+
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens = "required"
+  }
+
   tags = {
     Name = "${var.name}"
   }
