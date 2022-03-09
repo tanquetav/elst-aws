@@ -12,3 +12,8 @@ variable "worker_nodes" {
   type    = number
   default = 2
 }
+
+variable "instance_type" {
+  type    = string
+  default = "t3a.medium"
+}

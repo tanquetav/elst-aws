@@ -1,6 +1,6 @@
 # Elasticsearch/Kibana deployment to AWS
 
-This demo terraform project publishes an environment at AWS with a Elasticsearch Cluster (you can define how many worker nodes will be deployed beside the master one).
+This terraform demo project creates an environment at AWS with a Elasticsearch Cluster (you can define how many worker nodes will be deployed beside the master one).
 
 On local machine is created an ssh keypair (to connect to ec2 instances), a self-signed certificate (used in kibana). The first AWS resource deployed is a VPC (with VPC companion, like routing table, subnet, security group ) to create an isolated network to elasticsearch deployment with ssh(22)/kibana(5601) external access.
 
@@ -33,11 +33,12 @@ The kibana can be accessed using https://_public_ip_:5601 , user _elastic_ and p
 
 ## Inputs
 
-| Name                                                          | Description            | Type     | Default     | Required |
-| ------------------------------------------------------------- | ---------------------- | -------- | ----------- | :------: |
-| <a name="input_name"></a> [name](#input_name)                 | Tag name for resources | `string` | demo        |   yes    |
-| <a name="input_cidr_block"></a> [name](#input_cidr_block)     | CIDR block for vpc     | `string` | 10.0.0.0/16 |   yes    |
-| <a name="input_worker_nodes"></a> [name](#input_worker_nodes) | Now many worker nodes  | `number` | 2           |   yes    |
+| Name                                                                     | Description            | Type     | Default     | Required |
+| ------------------------------------------------------------------------ | ---------------------- | -------- | ----------- | :------: |
+| <a name="input_name"></a> [name](#input_name)                            | Tag name for resources | `string` | demo        |   yes    |
+| <a name="input_instance_type"></a> [instance_type](#input_instance_type) | Instance Type          | `string` | t3a.medium  |   yes    |
+| <a name="input_cidr_block"></a> [cidr_block](#input_cidr_block)          | CIDR block for vpc     | `string` | 10.0.0.0/16 |   yes    |
+| <a name="input_worker_nodes"></a> [worker_nodes](#input_worker_nodes)    | Now many worker nodes  | `number` | 2           |   yes    |
 
 ## Outputs
 

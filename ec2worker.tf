@@ -25,7 +25,7 @@ resource "aws_instance" "worker" {
   subnet_id                   = aws_subnet.subnet.id
   ami                         = data.aws_ami.ubuntuworker.id
   vpc_security_group_ids      = ["${aws_security_group.forwarder.id}"]
-  instance_type               = "t3a.medium"
+  instance_type               = var.instance_type
   key_name                    = var.name
   user_data                   = data.cloudinit_config.cloudinit.rendered
   associate_public_ip_address = true #tfsec:ignore:aws-autoscaling-no-public-ip
